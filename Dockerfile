@@ -34,9 +34,10 @@ RUN echo 'export CATALINA_OPTS="$RUNTIME_OPTS"' > bin/setenv.sh
 RUN mkdir -p /artifactory
 ENV ARTIFACTORY_HOME /artifactory
 
+# Change port
+RUN sed -i 's/8080/80/g' /usr/local/tomcat/conf/server.xml
+
 # Expose Artifactories data, log and backup directory.
-VOLUME /artifactory/data
-VOLUME /artifactory/logs
-VOLUME /artifactory/backup
+VOLUME /artifactory
 
 WORKDIR /artifactory
